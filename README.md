@@ -11,4 +11,13 @@
 ## v3 add first migration
             empty migration, add table migration
 ## v4 save new record             
-  save data to dbcontext
+        save data to dbcontext
+## v5 migration rollback 
+             remove-migration        ---remove last one    
+             update-database -migration:0    --- remove all updates
+## v6 add your own migration
+   insert into DB by migration 
+## v7  Different Between dataAnnotations   vs  fluentApi
+## v8 entity framework core -- mark column as required  
+             how make   dataAnnotations , and how make  fluentApi in same file or in sperated file 
+             
