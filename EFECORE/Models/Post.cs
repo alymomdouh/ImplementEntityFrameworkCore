@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace EFECORE.Models
 {
-    public  class Blog
+    public class Post
     {
         public int Id { get; set; }
-        [Required]
-        public string Url { get; set; }
-        public List<Post> Post { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
+        public Blog Blog { get; set; }
+
     }
 }
