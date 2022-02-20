@@ -15,6 +15,8 @@ namespace EFECORE.Models
         [Required]
         public string Url { get; set; }
         [NotMapped]
+        public DateTime ADDon { get; set; }
+        [NotMapped]
         public List<Post> Post { get; set; }
     }
 }

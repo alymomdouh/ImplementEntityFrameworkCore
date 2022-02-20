@@ -21,6 +21,7 @@ namespace EFECORE
             modelBuilder.Entity<Blog>().ToTable("Blogs","hr");
             modelBuilder.Entity<Blog>().ToView("ViewNameFromDb","hr");
             modelBuilder.HasDefaultSchema("hr");
+            modelBuilder.Entity<Blog>().Ignore (b=>b.ADDon);
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Blog> Blogs { get; set; }
