@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace EFECORE.Models
 {
+    [Table("Blogs", Schema = "hr")]
     public  class Blog
     {
         public int Id { get; set; }

@@ -15,9 +15,12 @@ namespace EFECORE
         {
             //modelBuilder.Entity<Blog>().Property(m => m.Url).IsRequired();
             new BlogEntityTypeConfiguration().Configure(modelBuilder.Entity<Blog>());
-            modelBuilder.Ignore<Post>();
-            modelBuilder.Entity<Blog>().ToTable("Blogs", b => b.ExcludeFromMigrations());
-            modelBuilder.Entity<Blog>().ToTable("Blogs");
+            //modelBuilder.Ignore<Post>();
+            //modelBuilder.Entity<Blog>().ToTable("Blogs", b => b.ExcludeFromMigrations());
+            //modelBuilder.Entity<Blog>().ToTable("Blogs");
+            modelBuilder.Entity<Blog>().ToTable("Blogs","hr");
+            modelBuilder.Entity<Blog>().ToView("ViewNameFromDb","hr");
+            modelBuilder.HasDefaultSchema("hr");
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Blog> Blogs { get; set; }
