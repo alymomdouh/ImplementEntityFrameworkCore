@@ -20,4 +20,17 @@
 ## v7  Different Between dataAnnotations   vs  fluentApi
 ## v8 entity framework core -- mark column as required  
              how make   dataAnnotations , and how make  fluentApi in same file or in sperated file 
-             
+## v9  entity framework core -- add entity to model 
+              domain model (entity)   , ondelete   restrict,cascad 
+              3 ways to add  entity class to dbcontext   1-dbset  2- navagation property  3- modelbuilder.Entity<entityname>();             
+## v10   entity framework core --  exelude entity from model or from migration    (not make mapping or table for entity)
+                            [NotMapped]
+                             modelbuilder.Ignore<post>(); 
+                             ship all alter for specifc table 
+## v11 entity framework core -- change table name 
+                            [Table("newtablename")]    //  above class name or entityname
+                               modelbuilder.Entity<post> ().ToTable("newtablename"); 
+ ## v12 change schema & map model to view   
+ ##  v13 entity framework core -- exclude properties 
+                               
+                             
