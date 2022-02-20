@@ -15,6 +15,8 @@ namespace EFECORE
         {
             //modelBuilder.Entity<Blog>().Property(m => m.Url).IsRequired();
             new BlogEntityTypeConfiguration().Configure(modelBuilder.Entity<Blog>());
+            modelBuilder.Ignore<Post>();
+            modelBuilder.Entity<Blog>().ToTable("Blogs", b => b.ExcludeFromMigrations());
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Blog> Blogs { get; set; }

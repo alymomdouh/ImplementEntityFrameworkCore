@@ -14,6 +14,7 @@ namespace EFECORE.Configurations
         public void Configure(EntityTypeBuilder<Blog> builder)
         {
             builder.Property(m => m.Url).IsRequired();
+            
         }
     }
 }
