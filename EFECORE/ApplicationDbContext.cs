@@ -36,8 +36,10 @@ namespace EFECORE
             modelBuilder.Entity<Blog>().HasKey(b => new { b.Rating, b.Url });// to add composit primary key
             modelBuilder.Entity<Blog>().Property(b => b.Rating).HasDefaultValue(5);
             modelBuilder.Entity<Blog>().Property(b => b.CreateOn).HasDefaultValueSql("GETDATE()");
+            modelBuilder.Entity<Author>().Property(b => b.DisplayName).HasComputedColumnSql("[FirstName]+','+[LastName]");
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Author> Authors { get; set; }
     }
 }
