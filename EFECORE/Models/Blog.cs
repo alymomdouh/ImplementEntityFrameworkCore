@@ -24,6 +24,7 @@ namespace EFECORE.Models
         public DateTime ADDon { get; set; }
         [Column(TypeName ="decimal(5,2)")]
         public decimal Rating { get; set; }
+        public DateTime CreateOn { get; set; }
         [NotMapped]
         public List<Post> Post { get; set; }
     }
