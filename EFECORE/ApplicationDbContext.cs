@@ -26,4 +26,4 @@ namespace EFECORE
         }
         public DbSet<Blog> Blogs { get; set; }
     }
-}
+} 
