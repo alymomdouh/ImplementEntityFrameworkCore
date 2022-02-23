@@ -13,6 +13,7 @@ namespace EFECORE.Models
     public  class Blog
     {
         [Column("BlogId")] 
+        [Key]
         public int Id { get; set; }
         [Required]
         public string Url { get; set; }
