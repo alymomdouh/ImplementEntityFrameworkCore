@@ -23,7 +23,7 @@ namespace EFECORE.Models
         public decimal Rating { get; set; }
         public DateTime CreateOn { get; set; }
         [NotMapped]
-        public List<Post> Post { get; set; }
+        public List<Post> Posts { get; set; }
         public BlogImage BlogImage { get; set; }
     }
 }
