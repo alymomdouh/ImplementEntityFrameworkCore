@@ -22,6 +22,11 @@ namespace EFECORE
             modelBuilder.Entity<Blog>().ToView("ViewNameFromDb","hr");
             modelBuilder.HasDefaultSchema("hr");
             modelBuilder.Entity<Blog>().Ignore (b=>b.ADDon);
+            modelBuilder.Entity<Blog>().Property(b=>b.Id).HasColumnName("BlogId");
+            modelBuilder.Entity<Blog>(b =>
+            {
+                b.Property(eb => eb.Url).HasColumnType("varchar(100)").HasColumnName("blogurl").HasDefaultValue(" ");
+            });
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Blog> Blogs { get; set; }

@@ -11,11 +11,15 @@ namespace EFECORE.Models
     [Table("Blogs", Schema = "hr")]
     public  class Blog
     {
+        [Column("BlogId")] 
         public int Id { get; set; }
         [Required]
         public string Url { get; set; }
         [NotMapped]
+        [Column(TypeName ="varchar(200)")]
         public DateTime ADDon { get; set; }
+        [Column(TypeName ="decimal(5,2)")]
+        public decimal Rating { get; set; }
         [NotMapped]
         public List<Post> Post { get; set; }
     }
