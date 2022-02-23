@@ -31,6 +31,7 @@ namespace EFECORE
 
             modelBuilder.Entity<Blog>().Property(b => b.Url).HasComment("the url2 of the Blog Table from fluent api");
             modelBuilder.Entity<Blog>().HasKey(b => b.Id) ;
+            modelBuilder.Entity<Blog>().HasKey(b => b.Id).HasName("Pk-Blog");
             modelBuilder.Entity<Blog>().HasNoKey();
             base.OnModelCreating(modelBuilder);
         }
