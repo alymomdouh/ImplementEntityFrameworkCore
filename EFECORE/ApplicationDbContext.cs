@@ -40,6 +40,8 @@ namespace EFECORE
             modelBuilder.Entity<Category>().Property(p=>p.Id).ValueGeneratedOnAdd();
             //modelBuilder.Entity<Category>().Property(p=>p.Id).ValueGeneratedOnUpdate();
             //modelBuilder.Entity<Category>().Property(p=>p.Id).ValueGeneratedOnAddOrUpdate();
+            // make 1=>1 relationship
+            modelBuilder.Entity<Blog>().HasOne(p=>p.BlogImage).WithOne(i=>i.Blog).HasForeignKey<BlogImage>(bi=>bi.BlogId);
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Blog> Blogs { get; set; }
