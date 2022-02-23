@@ -1,6 +1,8 @@
 ﻿using EFECORE.Configurations;
 using EFECORE.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 
 namespace EFECORE
 {
@@ -47,10 +49,37 @@ namespace EFECORE
             modelBuilder.Entity<Blog>().HasMany(b=>b.Posts).WithOne(p=>p.Blog) ;
             modelBuilder.Entity<Post>().HasOne(p=>p.Blog).WithMany(b=>b.Posts).HasForeignKey(p=>p.BlogId);
             modelBuilder.Entity<Post>().HasOne<Blog>().WithMany().HasForeignKey(p=>p.BlogId).HasConstraintName("FK_Posts_Blog_Test");
+            // make 1=>m relationship part2  v26 make link foregin key not primarykey in first table
+            modelBuilder.Entity<RecordOfSales>().HasOne(s => s.Car)
+                       .WithMany(c => c.SaleHistory).HasForeignKey(rs => rs.CarLicensePlate)
+                                   .HasPrincipalKey(c => c.LicensePlate);
+            modelBuilder.Entity<RecordOfSales>().HasOne(s => s.Car)
+                       .WithMany(c => c.SaleHistory).HasForeignKey(rs => new { rs.CarLicensePlate ,rs.CarState})
+                                   .HasPrincipalKey(c => new { c.LicensePlate ,c.State});
+
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Car> Cars { get; set; }
+    }
+    public class Car
+    {
+        public int CarId { get; set; }
+        public string LicensePlate { get; set; }
+        public string State { get; set; }
+        public string Make { get; set; }
+        public string Model { get; set; }
+        public List<RecordOfSales> SaleHistory { get; set; }
+    }
+    public class RecordOfSales
+    {
+        public int RecordOfSalesId { get; set; }
+        public DateTime DateSold { get; set; }
+        public decimal price { get; set; }
+        public string CarLicensePlate { get; set; }
+        public string CarState { get; set; }
+        public Car Car { get; set; }
     }
 }
