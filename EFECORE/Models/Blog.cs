@@ -17,6 +17,7 @@ namespace EFECORE.Models
         public string Url { get; set; }
         [NotMapped]
         [Column(TypeName ="varchar(200)")]
+        [MaxLength(100,ErrorMessage ="the length should be with 100 char ")]
         public DateTime ADDon { get; set; }
         [Column(TypeName ="decimal(5,2)")]
         public decimal Rating { get; set; }

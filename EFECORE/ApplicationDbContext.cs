@@ -23,6 +23,7 @@ namespace EFECORE
             modelBuilder.HasDefaultSchema("hr");
             modelBuilder.Entity<Blog>().Ignore (b=>b.ADDon);
             modelBuilder.Entity<Blog>().Property(b=>b.Id).HasColumnName("BlogId");
+            modelBuilder.Entity<Blog>().Property(b=>b.Url).HasMaxLength(200);
             modelBuilder.Entity<Blog>(b =>
             {
                 b.Property(eb => eb.Url).HasColumnType("varchar(100)").HasColumnName("blogurl").HasDefaultValue(" ");
