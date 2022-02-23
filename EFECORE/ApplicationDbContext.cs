@@ -56,6 +56,19 @@ namespace EFECORE
             modelBuilder.Entity<RecordOfSales>().HasOne(s => s.Car)
                        .WithMany(c => c.SaleHistory).HasForeignKey(rs => new { rs.CarLicensePlate ,rs.CarState})
                                    .HasPrincipalKey(c => new { c.LicensePlate ,c.State});
+            /// many to many
+            modelBuilder.Entity<Post>().HasMany(p => p.Tags).WithMany(t => t.Posts).UsingEntity(j => j.ToTable("PostTagsTest"));
+
+            modelBuilder.Entity<Post>().HasMany(p => p.Tags).WithMany(t => t.Posts)
+                .UsingEntity<PostTag>(
+                                        j => j.HasOne(pt => pt.Tag).WithMany(t => t.postTags).HasForeignKey(pt => pt.TagId),
+                                        j => j.HasOne(pt => pt.Post).WithMany(t => t.postTags).HasForeignKey(pt => pt.PostId),
+                                        j =>
+                                        {
+                                            j.Property(pt => pt.AddedOn).HasDefaultValueSql("GETDATE()");
+                                            j.HasKey(pt => new { pt.PostId, pt.TagId });
+                                        }
+                                      ); 
 
             base.OnModelCreating(modelBuilder);
         }
