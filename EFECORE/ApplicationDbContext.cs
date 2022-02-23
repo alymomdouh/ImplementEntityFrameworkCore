@@ -33,6 +33,7 @@ namespace EFECORE
             modelBuilder.Entity<Blog>().HasKey(b => b.Id) ;
             modelBuilder.Entity<Blog>().HasKey(b => b.Id).HasName("Pk-Blog");
             modelBuilder.Entity<Blog>().HasNoKey();
+            modelBuilder.Entity<Blog>().HasKey(b => new {b.Rating,b.Url });// to add composit primary key
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Blog> Blogs { get; set; }
