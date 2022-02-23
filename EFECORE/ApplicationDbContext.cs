@@ -37,9 +37,13 @@ namespace EFECORE
             modelBuilder.Entity<Blog>().Property(b => b.Rating).HasDefaultValue(5);
             modelBuilder.Entity<Blog>().Property(b => b.CreateOn).HasDefaultValueSql("GETDATE()");
             modelBuilder.Entity<Author>().Property(b => b.DisplayName).HasComputedColumnSql("[FirstName]+','+[LastName]");
+            modelBuilder.Entity<Category>().Property(p=>p.Id).ValueGeneratedOnAdd();
+            //modelBuilder.Entity<Category>().Property(p=>p.Id).ValueGeneratedOnUpdate();
+            //modelBuilder.Entity<Category>().Property(p=>p.Id).ValueGeneratedOnAddOrUpdate();
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Author> Authors { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }
