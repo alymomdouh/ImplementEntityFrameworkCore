@@ -75,6 +75,7 @@ namespace EFECORE
             modelBuilder.Entity<PostTag>().HasOne(pt=>pt.Tag).WithMany(p=>p.postTags).HasForeignKey(pt=>pt.TagId);
 
             modelBuilder.Entity<Blog>().HasIndex(b => b.Url);
+            modelBuilder.Entity<Blog>().HasIndex(b => b.Url).IsUnique();
 
             modelBuilder.Entity<Person>().HasIndex(b => new {b.FirstName,b.LastName});
 
