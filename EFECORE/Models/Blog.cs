@@ -9,6 +9,7 @@ namespace EFECORE.Models
     [Table("Blogs", Schema = "hr")]
     [Index(nameof(Url))]
     [Index(nameof(Url),IsUnique =true)]
+    [Index(nameof(Url),Name ="index_name")]
     public class Blog
     {
         [Column("BlogId")]

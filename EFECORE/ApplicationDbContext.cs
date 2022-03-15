@@ -76,6 +76,7 @@ namespace EFECORE
 
             modelBuilder.Entity<Blog>().HasIndex(b => b.Url);
             modelBuilder.Entity<Blog>().HasIndex(b => b.Url).IsUnique();
+            modelBuilder.Entity<Blog>().HasIndex(b => b.Url).HasDatabaseName("index-name");
 
             modelBuilder.Entity<Person>().HasIndex(b => new {b.FirstName,b.LastName});
 
