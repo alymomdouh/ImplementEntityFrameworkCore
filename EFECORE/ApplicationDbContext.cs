@@ -74,6 +74,9 @@ namespace EFECORE
             modelBuilder.Entity<PostTag>().HasOne(pt=>pt.Post).WithMany(p=>p.postTags).HasForeignKey(pt=>pt.PostId);
             modelBuilder.Entity<PostTag>().HasOne(pt=>pt.Tag).WithMany(p=>p.postTags).HasForeignKey(pt=>pt.TagId);
 
+            modelBuilder.Entity<Blog>().HasIndex(b => b.Url);
+
+
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Blog> Blogs { get; set; }

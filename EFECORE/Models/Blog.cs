@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace EFECORE.Models
 {
     [Table("Blogs", Schema = "hr")]
+    [Index(nameof(Url))]
     public class Blog
     {
         [Column("BlogId")]
