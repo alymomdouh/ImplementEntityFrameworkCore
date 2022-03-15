@@ -68,7 +68,11 @@ namespace EFECORE
                                             j.Property(pt => pt.AddedOn).HasDefaultValueSql("GETDATE()");
                                             j.HasKey(pt => new { pt.PostId, pt.TagId });
                                         }
-                                      ); 
+                                      );
+            /// indirect many to many relationship 
+            modelBuilder.Entity<PostTag>().HasKey(t => new { t.PostId, t.TagId });
+            modelBuilder.Entity<PostTag>().HasOne(pt=>pt.Post).WithMany(p=>p.postTags).HasForeignKey(pt=>pt.PostId);
+            modelBuilder.Entity<PostTag>().HasOne(pt=>pt.Tag).WithMany(p=>p.postTags).HasForeignKey(pt=>pt.TagId);
 
             base.OnModelCreating(modelBuilder);
         }
