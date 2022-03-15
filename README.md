@@ -32,5 +32,20 @@
                                modelbuilder.Entity<post> ().ToTable("newtablename"); 
  ## v12 change schema & map model to view   
  ##  v13 entity framework core -- exclude properties 
-                               
+ ## v14  v14 entity framework core -- change column name
+ ## v15 entity framework core -- change column data type
+ ## v16 entity framework core -- maximum length 
+ ## v17 entity framework core --  column comments 
+ ## v18 entity framework core --  set primary key
+ ## v19 entity framework core --  change primary key  name
+ ## v20 entity framework core -- set composite key
+ ## v21  entity framework core -- set default value
+ ## v22  entity framework core -- computed columns
+ ## v23  entity framework core -- primary key default value
+ ## v24   entity framework core -- [one to one relationship]
+ ## v25   entity framework core -- one to many relationship 
+ ## v26 entity framework core -- one to many relationship  part2
+##  v27 entity framework core -- many to many relationship   
+  
+ 
                              
