@@ -76,6 +76,8 @@ namespace EFECORE
 
             modelBuilder.Entity<Blog>().HasIndex(b => b.Url);
 
+            modelBuilder.Entity<Person>().HasIndex(b => new {b.FirstName,b.LastName});
+
 
             base.OnModelCreating(modelBuilder);
         }
@@ -83,6 +85,7 @@ namespace EFECORE
         public DbSet<Author> Authors { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Car> Cars { get; set; }
+        public DbSet<Person> Persons { get; set; }
     }
     public class Car
     {
