@@ -92,7 +92,27 @@ namespace EFECORE
             modelBuilder.Entity<Order>().Property(o => o.OrderNo).HasDefaultValueSql("NEXT VALUE FOR Shared.OrderNuber"); 
            // modelBuilder.Entity<OrderTest>().Property(o => o.OrderNo).HasDefaultValueSql("NEXT VALUE FOR [OrderNuber]");
             modelBuilder.Entity<OrderTest>().Property(o => o.OrderNo).HasDefaultValueSql("NEXT VALUE FOR Shared.OrderNuber");
-
+            // seed data
+            // when use HasData  must add the primary key auto generate with this function 
+            modelBuilder.Entity<Blog>().HasData(
+                new Blog { Id = 1, Url = "http://sample.com/blogs/sample-1" },
+                new Blog { Id = 2, Url = "http://sample.com/blogs/sample-2" },
+                new Blog { Id = 3, Url = "http://sample.com/blogs/sample-3" }
+                );
+            modelBuilder.Entity<Post>().HasData(
+                new Post { Id = 1, BlogId = 1, Title = "Post 1" },
+                new Post { Id = 2, BlogId = 1, Title = "Post 2" },
+                new Post { Id = 3, BlogId = 1, Title = "Post 3" },
+                new Post { Id = 4, BlogId = 2, Title = "Post 4" },
+                new Post { Id = 5, BlogId = 2, Title = "Post 5" },
+                new Post { Id = 6, BlogId = 2, Title = "Post 6" },
+                new Post { Id = 7, BlogId = 3, Title = "Post 7" },
+                new Post { Id = 8, BlogId = 3, Title = "Post 8" },
+                new Post { Id = 9, BlogId = 3, Title = "Post 9" }
+                );
+            // if BlogId not found will give the error
+            // other way to seed data inside migration file 
+                     //modelBuilder.Sql("INSERT INTO Blogs (Id,Url) VALUES (4,'http://sample.com/blogs/sample-4')");
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Blog> Blogs { get; set; }
