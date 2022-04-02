@@ -77,6 +77,10 @@ namespace EFECORE
             modelBuilder.Entity<Blog>().HasIndex(b => b.Url);
             modelBuilder.Entity<Blog>().HasIndex(b => b.Url).IsUnique();
             modelBuilder.Entity<Blog>().HasIndex(b => b.Url).HasDatabaseName("index-name");
+            modelBuilder.Entity<Blog>().HasIndex(b => b.Url).HasFilter("[Url] IS NOT NULL");
+            // to add index put not add null so the index will accept the null value
+            modelBuilder.Entity<Blog>().HasIndex(b => b.Url).HasFilter(null);
+
 
             modelBuilder.Entity<Person>().HasIndex(b => new {b.FirstName,b.LastName});
 
