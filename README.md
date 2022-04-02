@@ -57,12 +57,28 @@ Sequences is make primary key or autoincrement in multi table
 ##  v35 entity framework core -- Data Seeding   
 ##  v36 entity framework core -- Manage Migration and Generate SQL Scripts
     very important video about migrations and how apply Migrations in server live or move Migration from local to live the most used commands  
-             script-migration
-             script-migration migrationnametostartfromtoend 
-             script-migration migrationnametostartafter migrationnametoendwithit 
-             get-migration
-             update-database migrationnametoendwith 
- 
-  
- 
+            =>script-migration
+            => script-migration migrationnametostartfromtoend 
+            => script-migration migrationnametostartafter migrationnametoendwithit 
+            =>get-migration
+            => update-database migrationnametoendwith 
+##  v37 entity framework core -- Working With an Existing Database (Database Scaffolding)
+     very important video how deal with exists database in entity framework core
+       --old ways befor entity framework core
+             1-DataBaseFirst 
+             2-CodeFirstFromExistsDatabase
+       --new ways with entity framework core  
+             1-Database Scaffolding(Reverese Engineering)
+           -- scaffold-dbContext 'connectiostring' service providers 
+           => scaffold-dbContext 'Data Source=.;Initial Catalog=databasename' Microsoft.EntityFrameworkCore.SqlServer 
+           // be default will use fluentApi and will generate dbcontext and all models 
+          => scaffold-dbContext 'Data Source=.;Initial Catalog=databasename' Microsoft.EntityFrameworkCore.SqlServer -Tables Blog,Post -OutputDir Models  
+                        -ContextDir Data -Context newcontextname
+                        // to get only needed tables //ToPutTheTables,DbcontextInFFolder  //ToDbcontextInFFolder
+                        // to change from fluentApi to dataAnnotations 
+           =>scaffold-dbContext 'Data Source=.;Initial Catalog=databasename' Microsoft.EntityFrameworkCore.SqlServer  -DataAnnotations 
+       
+     
+     
+      
                              
