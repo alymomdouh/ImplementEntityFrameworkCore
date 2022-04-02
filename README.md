@@ -62,21 +62,21 @@ Sequences is make primary key or autoincrement in multi table
             => script-migration migrationnametostartafter migrationnametoendwithit 
             =>get-migration
             => update-database migrationnametoendwith 
- ##  v37 entity framework core -- Working With an Existing Database (Database Scaffolding)
- very important video how deal with exists database in entity framework core
-   --old ways befor entity framework core
-         1-DataBaseFirst 
-         2-CodeFirstFromExistsDatabase
-   --new ways with entity framework core  
-         1-Database Scaffolding(Reverese Engineering)
-       -- scaffold-dbContext 'connectiostring' service providers 
-       => scaffold-dbContext 'Data Source=.;Initial Catalog=databasename' Microsoft.EntityFrameworkCore.SqlServer 
-       // be default will use fluentApi and will generate dbcontext and all models 
-      => scaffold-dbContext 'Data Source=.;Initial Catalog=databasename' Microsoft.EntityFrameworkCore.SqlServer -Tables Blog,Post -OutputDir Models  
-                    -ContextDir Data -Context newcontextname
-                    // to get only needed tables //ToPutTheTables,DbcontextInFFolder  //ToDbcontextInFFolder
-                    // to change from fluentApi to dataAnnotations 
-       =>scaffold-dbContext 'Data Source=.;Initial Catalog=databasename' Microsoft.EntityFrameworkCore.SqlServer  -DataAnnotations 
+##  v37 entity framework core -- Working With an Existing Database (Database Scaffolding)
+     very important video how deal with exists database in entity framework core
+       --old ways befor entity framework core
+             1-DataBaseFirst 
+             2-CodeFirstFromExistsDatabase
+       --new ways with entity framework core  
+             1-Database Scaffolding(Reverese Engineering)
+           -- scaffold-dbContext 'connectiostring' service providers 
+           => scaffold-dbContext 'Data Source=.;Initial Catalog=databasename' Microsoft.EntityFrameworkCore.SqlServer 
+           // be default will use fluentApi and will generate dbcontext and all models 
+          => scaffold-dbContext 'Data Source=.;Initial Catalog=databasename' Microsoft.EntityFrameworkCore.SqlServer -Tables Blog,Post -OutputDir Models  
+                        -ContextDir Data -Context newcontextname
+                        // to get only needed tables //ToPutTheTables,DbcontextInFFolder  //ToDbcontextInFFolder
+                        // to change from fluentApi to dataAnnotations 
+           =>scaffold-dbContext 'Data Source=.;Initial Catalog=databasename' Microsoft.EntityFrameworkCore.SqlServer  -DataAnnotations 
        
      
      
