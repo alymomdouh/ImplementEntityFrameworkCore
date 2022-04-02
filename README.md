@@ -77,8 +77,29 @@ Sequences is make primary key or autoincrement in multi table
                         // to get only needed tables //ToPutTheTables,DbcontextInFFolder  //ToDbcontextInFFolder
                         // to change from fluentApi to dataAnnotations 
            =>scaffold-dbContext 'Data Source=.;Initial Catalog=databasename' Microsoft.EntityFrameworkCore.SqlServer  -DataAnnotations 
-       
-     
+##  v38 entity framework core --  Select All Data, Select One Item Using .Find // and give id 
+           using website mockaroo.com to get data 
+##  v39 entity framework core -- Select One Item Using .Single  
+##  v40 entity framework core -- Select One Item Using .First 
+##  v41 entity framework core -- Select One Item Using .Last
+                last only with orderby or will give exception 
+##  v42 entity framework core -- Filtering Data Using .Where 
+##  v43 entity framework core -- Any vs .All 
+                Any => return true or false  if any row give true of condition
+                All => return true or false  if all given rows success the condition =>true else false 
+##  v44 entity framework core -- Append vs .Prepend 
+                        Append=> add element in last of list 
+                        Prepend=> add element in first of list 
+                        Append ,Prepend  only applying in client side not server side 
+##  v45 entity framework core --  Average vs .Count vs .LongCount vs  .Sum  
+##  v46 entity framework core -- Max vs .Min  
+##  v47 entity framework core --  Data Sorting Using .OrderBy vs .OrderByDescending vs ThenBy vs ThenByDescending   
+##  v48 entity framework core --   Projection Using .Select   
+##  v49 entity framework core --   Select Unique Values Using .Distinct   
+##  v50 entity framework core --  Take vs .Skip   
+   
+
+
      
       
                              
