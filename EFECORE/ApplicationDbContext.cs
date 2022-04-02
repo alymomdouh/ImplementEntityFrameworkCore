@@ -83,7 +83,15 @@ namespace EFECORE
 
 
             modelBuilder.Entity<Person>().HasIndex(b => new {b.FirstName,b.LastName});
-
+            // to make Sequences  unique list not only for one table but for all tables
+            //modelBuilder.HasSequence<int>("OrderNuber");
+            //modelBuilder.HasSequence<int>("OrderNuber", schema: "Shared");
+            // to make start value for sequence and the step value
+            modelBuilder.HasSequence<int>("OrderNuber", schema: "Shared").StartsAt(100).IncrementsBy(10);
+            //modelBuilder.Entity<Order>().Property(o => o.OrderNo).HasDefaultValueSql("NEXT VALUE FOR [OrderNuber]");
+            modelBuilder.Entity<Order>().Property(o => o.OrderNo).HasDefaultValueSql("NEXT VALUE FOR Shared.OrderNuber"); 
+           // modelBuilder.Entity<OrderTest>().Property(o => o.OrderNo).HasDefaultValueSql("NEXT VALUE FOR [OrderNuber]");
+            modelBuilder.Entity<OrderTest>().Property(o => o.OrderNo).HasDefaultValueSql("NEXT VALUE FOR Shared.OrderNuber");
 
             base.OnModelCreating(modelBuilder);
         }
@@ -92,6 +100,8 @@ namespace EFECORE
         public DbSet<Category> Categories { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Person> Persons { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderTest> OrderTests { get; set; }
     }
     public class Car
     {
