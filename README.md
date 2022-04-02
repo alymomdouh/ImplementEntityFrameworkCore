@@ -56,14 +56,13 @@
 Sequences is make primary key or autoincrement in multi table 
 ##  v35 entity framework core -- Data Seeding   
 ##  v36 entity framework core -- Manage Migration and Generate SQL Scripts
-very important video about migrations and how apply Migrations in server live or move Migration from local to live 
-<code>
- script-migration
- script-migration migrationnametostartfromtoend 
- script-migration migrationnametostartafter migrationnametoendwithit 
- get-migration
- update-database migrationnametoendwith 
-</code>
+    very important video about migrations and how apply Migrations in server live or move Migration from local to live the most used commands  
+             script-migration
+             script-migration migrationnametostartfromtoend 
+             script-migration migrationnametostartafter migrationnametoendwithit 
+             get-migration
+             update-database migrationnametoendwith 
+ 
   
  
                              
