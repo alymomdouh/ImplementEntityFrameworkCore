@@ -1,5 +1,6 @@
 ﻿using EFECORE.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace EFECORE
@@ -10,6 +11,7 @@ namespace EFECORE
         {
             Console.WriteLine("Hello World!");
             SeedData();
+            var blogInPageOne = GetPagentation(1,10);
         }
         // function to seeddata to database 
         public static void SeedData()
@@ -25,6 +27,12 @@ namespace EFECORE
                 } 
                 context.SaveChanges();
             }
+        }
+
+        public static List<Blog> GetPagentation(int pageNumber , int pageSize)
+        {
+            var context = new ApplicationDbContext();
+            return context.Blogs.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
         }
     }
 }
