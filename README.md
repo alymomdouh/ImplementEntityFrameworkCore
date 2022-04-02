@@ -46,6 +46,24 @@
  ## v25   entity framework core -- one to many relationship 
  ## v26 entity framework core -- one to many relationship  part2
 ##  v27 entity framework core -- many to many relationship   
+##  v28 entity framework core -- Indirect Many To Many Relationship   
+##  v29 entity framework core --  Indexes   
+##  v30 entity framework core -- Composite Index   
+##  v31 entity framework core -- Index Uniqueness   
+##  v32 entity framework core --Change Default Index Name  
+##  v33 entity framework core -- Index Filter 
+##  v34 entity framework core -- Sequences
+Sequences is make primary key or autoincrement in multi table 
+##  v35 entity framework core -- Data Seeding   
+##  v36 entity framework core -- Manage Migration and Generate SQL Scripts
+very important video about migrations and how apply Migrations in server live or move Migration from local to live 
+<code>
+ script-migration
+ script-migration migrationnametostartfromtoend 
+ script-migration migrationnametostartafter migrationnametoendwithit 
+ get-migration
+ update-database migrationnametoendwith 
+</code>
   
  
                              
