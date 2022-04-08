@@ -1,4 +1,5 @@
 ﻿using EFECORE.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,24 @@ namespace EFECORE
             Console.WriteLine("Hello World!");
             SeedData();
             var blogInPageOne = GetPagentation(1,10);
+            // make entity not track any models
+            var context = new ApplicationDbContext();
+            // the entity default add tracking 
+            var blog= context.Blogs.AsNoTracking().SingleOrDefault();
+            blog.Rating = 100;
+            context.SaveChanges();
+            // remove tracking from entity 
+           var blog2= context.Blogs.AsNoTracking().SingleOrDefault();
+            blog.Rating = 100;
+            context.SaveChanges();
+            //change the default 
+            context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;    //QueryTrackingBehavior.TrackAll;
+            // get all trackes in context 
+            var trackers = context.ChangeTracker.Entries();
+            foreach (var tracker in trackers)
+            {
+                Console.WriteLine($"{tracker.Entity.ToString()} ,{tracker.State.ToString()}, {tracker.CurrentValues}");
+            }
         }
         // function to seeddata to database 
         public static void SeedData()
