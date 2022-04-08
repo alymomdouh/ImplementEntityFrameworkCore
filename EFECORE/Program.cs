@@ -31,6 +31,10 @@ namespace EFECORE
             {
                 Console.WriteLine($"{tracker.Entity.ToString()} ,{tracker.State.ToString()}, {tracker.CurrentValues}");
             }
+            // example v55 entity framework core -- Eager Loading
+            var blog3 = context.Blogs.Include(x=>x.BlogImage.Caption).SingleOrDefault(l=>l.Id==1);
+            //Eager Loading with nested navigation properties
+            var blog32 = context.Blogs.Include(bi=>bi.BlogImage).ThenInclude(x=>x.Blog).SingleOrDefault(l=>l.Id==1);
         }
         // function to seeddata to database 
         public static void SeedData()
