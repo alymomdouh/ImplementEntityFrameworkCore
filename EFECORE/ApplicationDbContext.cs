@@ -10,7 +10,7 @@ namespace EFECORE
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=.;Initial Catalog=EFCoreDb;Integrated Security=true");
+            optionsBuilder.UseLazyLoadingProxies().UseSqlServer(@"Data Source=.;Initial Catalog=EFCoreDb;Integrated Security=true");
             base.OnConfiguring(optionsBuilder);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
