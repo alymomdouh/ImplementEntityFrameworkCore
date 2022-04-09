@@ -56,6 +56,9 @@ namespace EFECORE
             var blog582 = context.Blogs.Include(x => x.BlogImage.Caption).AsSplitQuery().SingleOrDefault(l => l.Id == 1);// in sql profiler query do in 2 step1  SelectDataFromFirstTable step2 SelectDataFromSecondTable and join with first table 
             // make one query default when change the default 
             var blog583 = context.Blogs.Include(x => x.BlogImage.Caption).AsSingleQuery().SingleOrDefault(l => l.Id == 1);
+            //v60 entity framework core -- Select Data Using SQL Statement or Stored Procedure - Part 1
+            var blogs601 = context.Blogs.FromSqlRaw("select * from Blogs").ToList();
+
         }
         // function to seeddata to database 
         public static void SeedData()
