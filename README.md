@@ -97,6 +97,41 @@ Sequences is make primary key or autoincrement in multi table
 ##  v48 entity framework core --   Projection Using .Select   
 ##  v49 entity framework core --   Select Unique Values Using .Distinct   
 ##  v50 entity framework core --  Take vs .Skip   
+##  v51 entity framework core --  GroupBy
+##  v52 entity framework core --  Inner Join Usin .Join (Extension Method)
+<a href="https://learnsql.com/blog/learn-and-practice-sql-joins/">How to Learn SQL JOIN used image and important article </a>
+Join 2 or 3 table any of them not contain null values 
+##  v53 entity framework core --  Left Join Using .GroupJoin (Extension Method)
+Join 2 or 3 table any of them can contain null values(use null safty) 
+##  v54 entity framework core --  Tracking vs. NoTracking
+entity default work with Tracking
+##  v55 entity framework core -- Eager Loading 
+entity default not load navigation properties with model must use function (Include),(ThenInclude) Before condition or Select 
+Include afect of the performance of application because it load many tables data with the primary table 
+##  v56 entity framework core -- Explicit Loading 
+only load navigation properties when we need it in 2 steps not 1 step like Eager Loading
+##  v57 entity framework core -- Lazy Loading
+in 3 steps 
+1- Install-Package Microsoft.EntityFrameworkCore.Proxies from NuGet
+2- add [optionsBuilder.UseLazyLoadingProxies().UseSqlServer ] in any one of 2 places [ApplicationDbContext.OnConfiguring] oR [Startup.ConfiguresServices]
+3- make all navigation properties is virtual 
+##  v58 entity framework core -- Split Queries   (only work with Eager Loading) 
+##  v59 entity framework core -- Join Using LINQ 
+##  v60 entity framework core -- Select Data Using SQL Statement or Stored Procedure - Part 1  
+##  v61 entity framework core -- Select Data Using SQL Statement or Stored Procedure - Part 2
+very important video add model to context <DbSet> and not map in database only in video no code 
+ modelBuilder.Entity<dtoViewTable>(e => e.HasNoKey().ToView(null));
+##  v62 entity framework core -- Global Query Filters 
+ apply a filter or condition in any where that use this model and how IgnoreQueryFilters
+ modelBuilder.Entity<Post>().HasQueryFilter(p => p.IsActive);
+ modelBuilder.Entity<Blog>().HasQueryFilter(p => p.Posts.Count>0);
+ var blogs622=context.Blogs.IgnoreQueryFilters().ToList();
+##  v63 entity framework core -- Add New Record(s) and Save Related Data  
+ Add AddRange   
+##  v64 entity framework core --   
+##  v65 entity framework core --    
+##  v66 entity framework core --    
+
    
 
 
