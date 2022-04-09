@@ -58,7 +58,9 @@ namespace EFECORE
             var blog583 = context.Blogs.Include(x => x.BlogImage.Caption).AsSingleQuery().SingleOrDefault(l => l.Id == 1);
             //v60 entity framework core -- Select Data Using SQL Statement or Stored Procedure - Part 1
             var blogs601 = context.Blogs.FromSqlRaw("select * from Blogs").ToList();
-
+            //v62 entity framework core -- Global Query Filters 
+            var blogs621=context.Blogs.ToList();// will apply Global Query Filters
+            var blogs622=context.Blogs.IgnoreQueryFilters().ToList();// willIgnoreQueryFilters Global Query Filters
         }
         // function to seeddata to database 
         public static void SeedData()

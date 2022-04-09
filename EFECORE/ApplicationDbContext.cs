@@ -34,7 +34,7 @@ namespace EFECORE
             {
                 b.Property(eb => eb.Url).HasColumnType("varchar(100)").HasColumnName("blogurl").HasDefaultValue(" ");
             });
-
+            
             modelBuilder.Entity<Blog>().Property(b => b.Url).HasComment("the url2 of the Blog Table from fluent api");
             modelBuilder.Entity<Blog>().HasKey(b => b.Id);
             modelBuilder.Entity<Blog>().HasKey(b => b.Id).HasName("Pk-Blog");
@@ -117,6 +117,8 @@ namespace EFECORE
             // if BlogId not found will give the error
             // other way to seed data inside migration file 
             //modelBuilder.Sql("INSERT INTO Blogs (Id,Url) VALUES (4,'http://sample.com/blogs/sample-4')");
+            //v62 entity framework core -- Global Query Filters 
+            modelBuilder.Entity<Blog>().HasQueryFilter(p => p.Posts.Count > 0);
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Blog> Blogs { get; set; }
