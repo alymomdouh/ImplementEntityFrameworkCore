@@ -127,10 +127,13 @@ very important video add model to context <DbSet> and not map in database only i
  modelBuilder.Entity<Blog>().HasQueryFilter(p => p.Posts.Count>0);
  var blogs622=context.Blogs.IgnoreQueryFilters().ToList();
 ##  v63 entity framework core -- Add New Record(s) and Save Related Data  
- Add AddRange   
-##  v64 entity framework core --   
-##  v65 entity framework core --    
-##  v66 entity framework core --    
+ Add,AddRange,add 2 tables In Same Time Have Relation By Navigation Properties   
+##  v64 entity framework core -- Update Record(s)
+ 3 ways to update 
+  1-by tracking
+  2-function Update and give it object with Id [have problem will make the value not send be null]  solve it by close modeifed for this columns 
+  3- Entry way [context.Entry(currentlyvalueobject).CurrentValues.SetValues(newvaluesobject);]
+   
 
    
 
