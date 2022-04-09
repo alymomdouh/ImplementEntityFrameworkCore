@@ -10,7 +10,11 @@ namespace EFECORE
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseLazyLoadingProxies().UseSqlServer(@"Data Source=.;Initial Catalog=EFCoreDb;Integrated Security=true");
+            //optionsBuilder.UseSqlServer(@"Data Source=.;Initial Catalog=EFCoreDb;Integrated Security=true");
+            //optionsBuilder.UseLazyLoadingProxies().UseSqlServer(@"Data Source=.;Initial Catalog=EFCoreDb;Integrated Security=true");
+            // make the default of sql make load in 2 steps 
+            //optionsBuilder.UseSqlServer(@"Data Source=.;Initial Catalog=EFCoreDb;Integrated Security=true",o=>o.UseQuerySplittingBehavior(QuerySplittingBehavior.SingleQuery));// the default 
+            optionsBuilder.UseSqlServer(@"Data Source=.;Initial Catalog=EFCoreDb;Integrated Security=true", o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));// change the default 
             base.OnConfiguring(optionsBuilder);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -39,23 +43,23 @@ namespace EFECORE
             modelBuilder.Entity<Blog>().Property(b => b.Rating).HasDefaultValue(5);
             modelBuilder.Entity<Blog>().Property(b => b.CreateOn).HasDefaultValueSql("GETDATE()");
             modelBuilder.Entity<Author>().Property(b => b.DisplayName).HasComputedColumnSql("[FirstName]+','+[LastName]");
-            modelBuilder.Entity<Category>().Property(p=>p.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Category>().Property(p => p.Id).ValueGeneratedOnAdd();
             //modelBuilder.Entity<Category>().Property(p=>p.Id).ValueGeneratedOnUpdate();
             //modelBuilder.Entity<Category>().Property(p=>p.Id).ValueGeneratedOnAddOrUpdate();
 
             // make 1=>1 relationship
-            modelBuilder.Entity<Blog>().HasOne(p=>p.BlogImage).WithOne(i=>i.Blog).HasForeignKey<BlogImage>(bi=>bi.BlogId);
+            modelBuilder.Entity<Blog>().HasOne(p => p.BlogImage).WithOne(i => i.Blog).HasForeignKey<BlogImage>(bi => bi.BlogId);
             // make 1=>m relationship
-            modelBuilder.Entity<Blog>().HasMany(b=>b.Posts).WithOne(p=>p.Blog) ;
-            modelBuilder.Entity<Post>().HasOne(p=>p.Blog).WithMany(b=>b.Posts).HasForeignKey(p=>p.BlogId);
-            modelBuilder.Entity<Post>().HasOne<Blog>().WithMany().HasForeignKey(p=>p.BlogId).HasConstraintName("FK_Posts_Blog_Test");
+            modelBuilder.Entity<Blog>().HasMany(b => b.Posts).WithOne(p => p.Blog);
+            modelBuilder.Entity<Post>().HasOne(p => p.Blog).WithMany(b => b.Posts).HasForeignKey(p => p.BlogId);
+            modelBuilder.Entity<Post>().HasOne<Blog>().WithMany().HasForeignKey(p => p.BlogId).HasConstraintName("FK_Posts_Blog_Test");
             // make 1=>m relationship part2  v26 make link foregin key not primarykey in first table
             modelBuilder.Entity<RecordOfSales>().HasOne(s => s.Car)
                        .WithMany(c => c.SaleHistory).HasForeignKey(rs => rs.CarLicensePlate)
                                    .HasPrincipalKey(c => c.LicensePlate);
             modelBuilder.Entity<RecordOfSales>().HasOne(s => s.Car)
-                       .WithMany(c => c.SaleHistory).HasForeignKey(rs => new { rs.CarLicensePlate ,rs.CarState})
-                                   .HasPrincipalKey(c => new { c.LicensePlate ,c.State});
+                       .WithMany(c => c.SaleHistory).HasForeignKey(rs => new { rs.CarLicensePlate, rs.CarState })
+                                   .HasPrincipalKey(c => new { c.LicensePlate, c.State });
             /// many to many
             modelBuilder.Entity<Post>().HasMany(p => p.Tags).WithMany(t => t.Posts).UsingEntity(j => j.ToTable("PostTagsTest"));
 
@@ -71,8 +75,8 @@ namespace EFECORE
                                       );
             /// indirect many to many relationship 
             modelBuilder.Entity<PostTag>().HasKey(t => new { t.PostId, t.TagId });
-            modelBuilder.Entity<PostTag>().HasOne(pt=>pt.Post).WithMany(p=>p.postTags).HasForeignKey(pt=>pt.PostId);
-            modelBuilder.Entity<PostTag>().HasOne(pt=>pt.Tag).WithMany(p=>p.postTags).HasForeignKey(pt=>pt.TagId);
+            modelBuilder.Entity<PostTag>().HasOne(pt => pt.Post).WithMany(p => p.postTags).HasForeignKey(pt => pt.PostId);
+            modelBuilder.Entity<PostTag>().HasOne(pt => pt.Tag).WithMany(p => p.postTags).HasForeignKey(pt => pt.TagId);
 
             modelBuilder.Entity<Blog>().HasIndex(b => b.Url);
             modelBuilder.Entity<Blog>().HasIndex(b => b.Url).IsUnique();
@@ -82,15 +86,15 @@ namespace EFECORE
             modelBuilder.Entity<Blog>().HasIndex(b => b.Url).HasFilter(null);
 
 
-            modelBuilder.Entity<Person>().HasIndex(b => new {b.FirstName,b.LastName});
+            modelBuilder.Entity<Person>().HasIndex(b => new { b.FirstName, b.LastName });
             // to make Sequences  unique list not only for one table but for all tables
             //modelBuilder.HasSequence<int>("OrderNuber");
             //modelBuilder.HasSequence<int>("OrderNuber", schema: "Shared");
             // to make start value for sequence and the step value
             modelBuilder.HasSequence<int>("OrderNuber", schema: "Shared").StartsAt(100).IncrementsBy(10);
             //modelBuilder.Entity<Order>().Property(o => o.OrderNo).HasDefaultValueSql("NEXT VALUE FOR [OrderNuber]");
-            modelBuilder.Entity<Order>().Property(o => o.OrderNo).HasDefaultValueSql("NEXT VALUE FOR Shared.OrderNuber"); 
-           // modelBuilder.Entity<OrderTest>().Property(o => o.OrderNo).HasDefaultValueSql("NEXT VALUE FOR [OrderNuber]");
+            modelBuilder.Entity<Order>().Property(o => o.OrderNo).HasDefaultValueSql("NEXT VALUE FOR Shared.OrderNuber");
+            // modelBuilder.Entity<OrderTest>().Property(o => o.OrderNo).HasDefaultValueSql("NEXT VALUE FOR [OrderNuber]");
             modelBuilder.Entity<OrderTest>().Property(o => o.OrderNo).HasDefaultValueSql("NEXT VALUE FOR Shared.OrderNuber");
             // seed data
             // when use HasData  must add the primary key auto generate with this function 
@@ -112,7 +116,7 @@ namespace EFECORE
                 );
             // if BlogId not found will give the error
             // other way to seed data inside migration file 
-                     //modelBuilder.Sql("INSERT INTO Blogs (Id,Url) VALUES (4,'http://sample.com/blogs/sample-4')");
+            //modelBuilder.Sql("INSERT INTO Blogs (Id,Url) VALUES (4,'http://sample.com/blogs/sample-4')");
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Blog> Blogs { get; set; }

@@ -51,9 +51,14 @@ namespace EFECORE
             //3 - make all navigation properties is virtual
             var blog51 = context.Blogs.SingleOrDefault(l => l.Id == 1);
             Console.WriteLine(blog51.Posts.Count);// load it only when call or use it 
+            //v58 entity framework core -- Split Queries   (only work with Eager Loading)       sql profiler
+            var blog58 = context.Blogs.Include(x => x.BlogImage.Caption).SingleOrDefault(l => l.Id == 1);// in sql profiler query do in 1 step get and join in same time
+            var blog582 = context.Blogs.Include(x => x.BlogImage.Caption).AsSplitQuery().SingleOrDefault(l => l.Id == 1);// in sql profiler query do in 2 step1  SelectDataFromFirstTable step2 SelectDataFromSecondTable and join with first table 
+            // make one query default when change the default 
+            var blog583 = context.Blogs.Include(x => x.BlogImage.Caption).AsSingleQuery().SingleOrDefault(l => l.Id == 1);
         }
-    // function to seeddata to database 
-    public static void SeedData()
+        // function to seeddata to database 
+        public static void SeedData()
     {
         using (var context = new ApplicationDbContext())
         {
