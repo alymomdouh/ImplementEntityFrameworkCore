@@ -1,4 +1,5 @@
-## Implement Entity Framework Core course content
+## Implement Entity Framework Core course content and my notes
+<a href="https://www.youtube.com/playlist?list=PL62tSREI9C-cHV28v-EqWinveTTAos8Pp">youtube course playlist link in youtube</a>
 ## video1 introduction
 ## v2 add dbcontext and connection string
 -make new console app(.net core)   <br>
