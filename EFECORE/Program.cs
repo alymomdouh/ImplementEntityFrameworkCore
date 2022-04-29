@@ -82,7 +82,46 @@ namespace EFECORE
             //66.[Arabic] Entity Framework Core - 66 Delete Related Data
             // default when delte primary row delte all child rows that releated to primary row by foreign key
             // to change the default behavour OnModelCreating function
-             
+            //67.[Arabic] Entity Framework Core - 67 Transactions
+            using var transaction = context.Database.BeginTransaction();
+            try
+            {
+                var blog67 = context.Blogs.FirstOrDefault(l => l.Id == 1);
+                context.Blogs.Remove(blog67);
+                context.SaveChanges();
+                
+                var blog672 = context.Blogs.FirstOrDefault(l => l.Id == 1);
+                context.Blogs.Remove(blog67);
+                context.SaveChanges();
+                
+                transaction.Commit();
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+            }
+            /// make savepoint
+            using var transaction2 = context.Database.BeginTransaction();
+            try
+            { 
+                context.Blogs.Add(new Blog { CreateOn = DateTime.Now, Id = 10, });
+                context.Blogs.Add(new Blog { CreateOn = DateTime.Now, Id = 30, });
+                context.SaveChanges();
+
+                transaction2.CreateSavepoint("savepoint1");
+
+
+                context.Blogs.Add(new Blog { CreateOn = DateTime.Now, Id = 10, });
+                context.Blogs.Add(new Blog { CreateOn = DateTime.Now, Id = 30, });
+                context.SaveChanges();
+
+                transaction2.Commit();
+            }
+            catch (Exception)
+            {
+                transaction2.RollbackToSavepoint("savepoint1");
+                transaction2.Commit();// this will save any before savepoint
+            }
 
         }
         // function to seeddata to database 
