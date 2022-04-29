@@ -133,8 +133,10 @@ very important video add model to context <DbSet> and not map in database only i
   1-by tracking
   2-function Update and give it object with Id [have problem will make the value not send be null]  solve it by close modeifed for this columns 
   3- Entry way [context.Entry(currentlyvalueobject).CurrentValues.SetValues(newvaluesobject);]
-   
-
+##   65.[Arabic] Entity Framework Core - 65 Remove Record(s)
+##   66.[Arabic] Entity Framework Core - 66 Delete Related Data
+##   67.[Arabic] Entity Framework Core - 67 Transactions
+## 68.[Arabic] Entity Framework Core - 68 Save Data with Sql Statment and Stored Procedures ExecuteSqlRaw
    
 
 
