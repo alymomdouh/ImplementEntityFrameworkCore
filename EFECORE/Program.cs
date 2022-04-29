@@ -71,6 +71,14 @@ namespace EFECORE
             context.Entry(blog64).Property(p => p.Rating).IsModified = false;
             //3th way to update 
             //context.Entry(currentlyvalueobject).CurrentValues.SetValues(newvaluesobject);
+            //65.[Arabic] Entity Framework Core - 65 Remove Record(s)
+            var blog65 = context.Blogs.FirstOrDefault(l => l.Id == 1);
+            context.Blogs.Remove(blog65);
+            context.SaveChanges();
+            //remove range
+            var blogrange65 = context.Blogs.Where(l => l.Id >=2).ToList();
+            context.Blogs.RemoveRange(blogrange65);
+            context.SaveChanges();
         }
         // function to seeddata to database 
         public static void SeedData()
