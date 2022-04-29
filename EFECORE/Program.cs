@@ -61,6 +61,16 @@ namespace EFECORE
             //v62 entity framework core -- Global Query Filters 
             var blogs621=context.Blogs.ToList();// will apply Global Query Filters
             var blogs622=context.Blogs.IgnoreQueryFilters().ToList();// willIgnoreQueryFilters Global Query Filters
+            //v64 entity framework core -- Update Record(s)
+            var blog64=context.Blogs.FirstOrDefault(l => l.Id == 1);
+            blog64.CreateOn = DateTime.Now;
+            context.SaveChanges();// firstway by tracking 
+           Blog blog642=new Blog { CreateOn = DateTime.Now,Id=1 , };
+            context.Update(blog642);// this will make other values =null 
+            context.Entry(blog64).Property(p => p.BlogImage).IsModified = false;
+            context.Entry(blog64).Property(p => p.Rating).IsModified = false;
+            //3th way to update 
+            //context.Entry(currentlyvalueobject).CurrentValues.SetValues(newvaluesobject);
         }
         // function to seeddata to database 
         public static void SeedData()
