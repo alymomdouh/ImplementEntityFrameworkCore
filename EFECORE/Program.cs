@@ -123,6 +123,9 @@ namespace EFECORE
                 transaction2.Commit();// this will save any before savepoint
             }
 
+            //68.[Arabic] Entity Framework Core - 68 Save Data with Sql Statment and Stored Procedures ExecuteSqlRaw
+            context.Database.ExecuteSqlRaw("select * from tablename");
+            context.Database.ExecuteSqlRaw("exec Sp_name");
         }
         // function to seeddata to database 
         public static void SeedData()
