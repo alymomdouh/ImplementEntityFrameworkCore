@@ -59,13 +59,13 @@ namespace EFECORE
             //v60 entity framework core -- Select Data Using SQL Statement or Stored Procedure - Part 1
             var blogs601 = context.Blogs.FromSqlRaw("select * from Blogs").ToList();
             //v62 entity framework core -- Global Query Filters 
-            var blogs621=context.Blogs.ToList();// will apply Global Query Filters
-            var blogs622=context.Blogs.IgnoreQueryFilters().ToList();// willIgnoreQueryFilters Global Query Filters
+            var blogs621 = context.Blogs.ToList();// will apply Global Query Filters
+            var blogs622 = context.Blogs.IgnoreQueryFilters().ToList();// willIgnoreQueryFilters Global Query Filters
             //v64 entity framework core -- Update Record(s)
-            var blog64=context.Blogs.FirstOrDefault(l => l.Id == 1);
+            var blog64 = context.Blogs.FirstOrDefault(l => l.Id == 1);
             blog64.CreateOn = DateTime.Now;
             context.SaveChanges();// firstway by tracking 
-           Blog blog642=new Blog { CreateOn = DateTime.Now,Id=1 , };
+            Blog blog642 = new Blog { CreateOn = DateTime.Now, Id = 1, };
             context.Update(blog642);// this will make other values =null 
             context.Entry(blog64).Property(p => p.BlogImage).IsModified = false;
             context.Entry(blog64).Property(p => p.Rating).IsModified = false;
@@ -76,30 +76,35 @@ namespace EFECORE
             context.Blogs.Remove(blog65);
             context.SaveChanges();
             //remove range
-            var blogrange65 = context.Blogs.Where(l => l.Id >=2).ToList();
+            var blogrange65 = context.Blogs.Where(l => l.Id >= 2).ToList();
             context.Blogs.RemoveRange(blogrange65);
             context.SaveChanges();
+            //66.[Arabic] Entity Framework Core - 66 Delete Related Data
+            // default when delte primary row delte all child rows that releated to primary row by foreign key
+            // to change the default behavour OnModelCreating function
+             
+
         }
         // function to seeddata to database 
         public static void SeedData()
-    {
-        using (var context = new ApplicationDbContext())
         {
-            //context.Database.EnsureDeleted();
-            context.Database.EnsureCreated();
-            var blog = context.Blogs.FirstOrDefault(b => b.Url == "http://blogs.msdn.com/adonet");
-            if (blog == null)
+            using (var context = new ApplicationDbContext())
             {
-                context.Blogs.Add(new Blog() { Url = "http://blogs.msdn.com/adonet" });
+                //context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
+                var blog = context.Blogs.FirstOrDefault(b => b.Url == "http://blogs.msdn.com/adonet");
+                if (blog == null)
+                {
+                    context.Blogs.Add(new Blog() { Url = "http://blogs.msdn.com/adonet" });
+                }
+                context.SaveChanges();
             }
-            context.SaveChanges();
+        }
+
+        public static List<Blog> GetPagentation(int pageNumber, int pageSize)
+        {
+            var context = new ApplicationDbContext();
+            return context.Blogs.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
         }
     }
-
-    public static List<Blog> GetPagentation(int pageNumber, int pageSize)
-    {
-        var context = new ApplicationDbContext();
-        return context.Blogs.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
-    }
-}
 }

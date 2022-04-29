@@ -120,6 +120,11 @@ namespace EFECORE
             //v62 entity framework core -- Global Query Filters 
             modelBuilder.Entity<Blog>().HasQueryFilter(p => p.Posts.Count > 0);
             base.OnModelCreating(modelBuilder);
+            // to change default when delete row 
+            modelBuilder.Entity<Blog>().HasMany(b => b.Posts).WithOne(p => p.Blog).OnDelete(DeleteBehavior.Cascade);// the default not need to write 
+            modelBuilder.Entity<Blog>().HasMany(b => b.Posts).WithOne(p => p.Blog).OnDelete(DeleteBehavior.Restrict);//  
+            modelBuilder.Entity<Blog>().HasMany(b => b.Posts).WithOne(p => p.Blog).OnDelete(DeleteBehavior.SetNull);//  
+
         }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Author> Authors { get; set; }
